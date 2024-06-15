@@ -13,13 +13,19 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.oluccaro.gymflowapp"
+    },
+    "androidStatusBar":{
+      "backgroundColor": "#f13223",
+      "translucent": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.oluccaro.gymflowapp"
     },
     "web": {
       "bundler": "metro",

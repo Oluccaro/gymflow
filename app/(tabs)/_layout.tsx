@@ -1,59 +1,85 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { View, Text, Image } from 'react-native'
+import React from 'react'
+import { Tabs, Redirect} from 'expo-router'
+import { Colors, Icons } from '@/constants'
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabIcon = ({icon, color, name, focused} : {icon :any, color: any, name: any, focused: any}) =>{
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
+    <View className='items-center justify-center'>
+      <Image
+        source={icon}
+        tintColor={color}
+        resizeMode='contain'
+        className="w-5 h-5"
       />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+      <Text className={`${focused ? 'font-psemibold' : 'font-pregular'}`} style={{color: Colors.white}}>{name}</Text>
+    </View>
+  )
 }
+
+const tabs = [
+  { 
+    name: "home",
+    icon: Icons.home,
+    title: "Home"
+  },
+  { 
+    name: "students",
+    icon: Icons.profile,
+    title: "Alunos"
+  },
+  { 
+    name: "finances",
+    icon: Icons.finances,
+    title: "Financeiro"
+  },
+  { 
+    name: "deals",
+    icon: Icons.deal,
+    title: "Planos"
+  },
+]
+
+const tabsScreen : React.ReactElement[] = [];
+
+tabs.forEach(tab => {
+  tabsScreen.push(
+    <Tabs.Screen
+          name={tab.name}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({color, focused}) => (
+              <TabIcon
+                icon={tab.icon}
+                color={color}
+                name={tab.title}
+                focused={focused}
+              />
+            )
+          }}
+        />
+  )
+})
+
+const TabsLayout = () => {
+  return (
+    <>
+      <Tabs 
+        screenOptions={{
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: Colors.primary,
+          tabBarStyle:{
+            backgroundColor: Colors.backgroundMain,
+            borderTopWidth: 1,
+            borderTopColor: Colors.backgroundMain,
+            height: 60
+          }
+        }} 
+      >
+        {tabsScreen}
+      </Tabs>
+    </>
+  )
+}
+
+export default TabsLayout
