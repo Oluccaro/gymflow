@@ -5,6 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Colors, Styles } from '@/constants';
 import Login from '@/app/(auth)/login';
 import CreateStudent from '@/app/screens/student/create-student'
+import NewEmployee from '@/app/screens/employee/new-employee'
+import NewActivity from '@/app/screens/activity/new-activity'
 
 
 
@@ -22,7 +24,7 @@ const Home = () => {
         <Stack.Screen
           options={{headerStyle: {backgroundColor: Colors.white}, headerShown:false}}
         />
-        <CreateStudent></CreateStudent>
+        <NewActivity></NewActivity>
       </SafeAreaView>
     </>
   )
