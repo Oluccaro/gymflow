@@ -4,6 +4,7 @@ import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Colors, Styles } from '@/constants';
 import Login from '@/app/(auth)/login';
+import CreateStudent from '@/app/screens/student/create-student'
 
 
 
@@ -18,10 +19,10 @@ const Home = () => {
         style='light'
       />
       <SafeAreaView className="bg-primaryBackground h-full">
-        <Stack.Screen 
+        <Stack.Screen
           options={{headerStyle: {backgroundColor: Colors.white}, headerShown:false}}
         />
-        <Login></Login>
+        <CreateStudent></CreateStudent>
       </SafeAreaView>
     </>
   )
