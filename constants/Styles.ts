@@ -7,6 +7,7 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+    backgroundColor: Colors.backgroundMain
   },
   image: {
     width: 250,
@@ -61,6 +62,32 @@ export const Styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: 'white',
-  }
+  },
+  button: {
+      height: 80,
+      width: 150,
+      backgroundColor: Colors.primary,
+      elevation: 4,
+      borderRadius: 18,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 20,
+      paddingHorizontal: 5,
+    },
+
+  pillButton: {
+    backgroundColor: Colors.add,
+    borderRadius: 50,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    height: 80,
+    width: 150,
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+  },
+
 });
 
