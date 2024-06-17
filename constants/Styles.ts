@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import Colors from '@/constants/Colors';
+import Icons from '@/constants/Icons';
 
 export const Styles = StyleSheet.create({
   container: {
@@ -25,13 +26,17 @@ export const Styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
+
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingLeft: 8,
-  },
+      height: 56,
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 12,
+      paddingLeft: 16,
+      paddingRight: 16,
+      borderRadius: 4,
+    },
+
   rememberMeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -88,6 +93,34 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 15,
   },
+
+
+  picker: {
+      height: 56,
+      marginBottom: 12,
+      backgroundColor: '#F5F5F5',
+      borderRadius: 4,
+      borderWidth: 1,
+      borderColor: 'black',
+      marginBottom: 20,
+  },
+
+  label: {
+      color: 'black',
+      marginBottom: 2,
+    },
+
+  appBar: {
+      height: 56,
+      backgroundColor: Colors.primary,
+      tintColor: Colors.white,
+      paddingVertical: 60,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+  scrollViewContent: {
+    },
 
 });
 
