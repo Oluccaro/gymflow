@@ -2,6 +2,7 @@ package com.app.gymflow.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class DealService {
           List<Modality> modalities = updatedDeal.getModalities()
                                                  .stream()
                                                  .map(mod -> mapper.map(mod, Modality.class))
-                                                 .toList();
+                                                 .collect(Collectors.toList());
+          deal.getModalities().clear();                                                 
           deal.setModalities(modalities);
           deal = dealRepository.save(deal);
           DealDTO dealDTO = mapper.map(deal, DealDTO.class);

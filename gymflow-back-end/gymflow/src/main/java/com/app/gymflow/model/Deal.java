@@ -49,7 +49,7 @@ public class Deal {
 
   @ManyToMany
   @JoinTable(
-    name = "deal_modality",
+    name = "t_deal_modality",
     joinColumns = @JoinColumn(name = "deal_id"),
     inverseJoinColumns = @JoinColumn(name = "modality_id")
   )

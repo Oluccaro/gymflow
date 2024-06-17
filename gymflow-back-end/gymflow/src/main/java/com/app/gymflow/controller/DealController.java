@@ -19,7 +19,7 @@ import com.app.gymflow.dto.DealDTO;
 import com.app.gymflow.service.DealService;
 
 @RestController
-@RequestMapping("/deals")
+@RequestMapping("/deal")
 public class DealController {
 
     @Autowired
@@ -44,7 +44,7 @@ public class DealController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DealDTO> updateDeal(@PathVariable Long id,@RequestBody DealDTO updatedDeal) {
+    public ResponseEntity<DealDTO> updateDeal(@PathVariable Long id, @RequestBody DealDTO updatedDeal) {
         try {
             DealDTO deal = dealService.updateDeal(id, updatedDeal);
             return ResponseEntity.ok(deal);
