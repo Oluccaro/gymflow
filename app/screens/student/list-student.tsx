@@ -64,7 +64,7 @@ const ListStudent : React.FC = () => {
                leading={props => (
                  <IconButton
                       icon={props => <Icon name="arrow-left" {...props} />}
-                      onPress={()=> router.pop()}
+                      onPress={()=> router.back()}
                       {...props}/>
                )}
       />

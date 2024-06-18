@@ -36,6 +36,7 @@ const CreateStudent = () => {
                 leading={props => (
                   <IconButton
                     icon={props => <Icon name="arrow-left" {...props} />}
+                    onPress={()=> router.back()}
                     {...props}
                     />
                 )}

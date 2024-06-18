@@ -5,7 +5,7 @@ import { AppBar, Button, IconButton, TextInput, ListItem  } from "@react-native-
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
 import { Styles, Images, Colors } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Router, Scene } from 'expo-router';
+import { useRouter } from 'expo-router';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import studentData from '@/assets/students.json';
 
@@ -13,6 +13,7 @@ import studentData from '@/assets/students.json';
 const ListModality = ({}) => {
   const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
       setStudents(studentData);
@@ -50,6 +51,7 @@ const ListModality = ({}) => {
            leading={props => (
              <IconButton
                icon={props => <Icon name="arrow-left" {...props} />}
+               onPress={()=> router.back()}
                {...props}/>
            )}
         />
