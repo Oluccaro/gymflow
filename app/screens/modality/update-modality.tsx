@@ -54,22 +54,24 @@ const UpdateModality = () => {
           />
         )}
       />
-      <ScrollView>
         <View style={Styles.container}>
           <View style={Styles.inputContainer}>
             <VStack m={15} spacing={10}>
+            <Text style={Styles.label}>Nome:</Text>
               <TextInput
-                placeholder="Nome"
+                title="Nome"
                 value={modality.name}
                 onChangeText={(text) => setModality({ ...modality, name: text })}
               />
+              <Text style={Styles.label}>Descrição:</Text>
               <TextInput
-                placeholder="Descrição"
+                title="Descrição"
                 value={modality.description}
                 onChangeText={(text) => setModality({ ...modality, description: text })}
               />
+              <Text style={Styles.label}>Benefícios para a Saúde:</Text>
               <TextInput
-                placeholder="Benefícios para a Saúde"
+                title="Benefícios para a Saúde"
                 value={modality.healthBenefits}
                 onChangeText={(text) => setModality({ ...modality, healthBenefits: text })}
               />
@@ -81,7 +83,6 @@ const UpdateModality = () => {
             </VStack>
           </View>
         </View>
-      </ScrollView>
     </View>
   );
 };

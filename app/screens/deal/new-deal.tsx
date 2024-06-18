@@ -19,8 +19,9 @@ const NewDeal = () => {
   const [endDate, setEndDate] = useState('');
   const [intervalUnit, setIntervalUnit] = useState('');
   const [intervalNumber, setIntervalNumber] = useState('');
-  const [selectedModalities, setSelectedModalities] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [modalities, setModalities] = useState<Modality[]>([]);
+  const [selectedModalities, setSelectedModalities] = useState<number[]>([]);
+  const [checkedModalities, setCheckedModalities] = useState<{ [key: number]: boolean }>({});
 
   const handleCadastro = async () => {
     try {

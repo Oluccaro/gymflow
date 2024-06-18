@@ -58,7 +58,7 @@ const UpdateDeal = () => {
   return (
     <View style={{ flex: 1 }}>
       <AppBar
-        title="Editar Deal"
+        title="Editar Plano"
         style={Styles.appBar}
         leading={props => (
           <IconButton
@@ -72,40 +72,51 @@ const UpdateDeal = () => {
         <View style={Styles.container}>
           <View style={Styles.inputContainer}>
             <VStack m={15} spacing={10}>
+            <Text style={Styles.label}>Descrição:</Text>
               <TextInput
+                title="Descrição"
                 placeholder="Descrição"
                 value={deal.description}
                 onChangeText={(text) => setDeal({ ...deal, description: text })}
               />
+              <Text style={Styles.label}>Preço:</Text>
               <TextInput
+              title="Preço"
                 placeholder="Preço"
                 value={deal.price?.toFixed(2)}
                 onChangeText={(text) => setDeal({ ...deal, price: parseFloat(text) })}
                 keyboardType="numeric"
               />
+              <Text style={Styles.label}>Intervalo de Cobrança:</Text>
               <TextInput
+                title="Intervalo de Cobrança"
                 placeholder="Intervalo de Cobrança (dias)"
                 value={deal.chargeInterval?.toString()}
                 onChangeText={(text) => setDeal({ ...deal, chargeInterval: parseInt(text, 10) })}
                 keyboardType="numeric"
               />
+              <Text style={Styles.label}>Data de Início:</Text>
               <TextInput
+                title="Data de Início"
                 placeholder="Data de Início"
                 value={deal.startDate}
                 onChangeText={(text) => setDeal({ ...deal, startDate: text })}
               />
+              <Text style={Styles.label}>Data de Término:</Text>
               <TextInput
-                placeholder="Data de Término"
+                title="Data de Término"
                 value={deal.endDate}
                 onChangeText={(text) => setDeal({ ...deal, endDate: text })}
               />
+              <Text style={Styles.label}>Unidade de Intervalos:</Text>
               <TextInput
-                placeholder="Unidade de Intervalo"
+                title="Unidade de Intervalo"
                 value={deal.intervalUnit}
                 onChangeText={(text) => setDeal({ ...deal, intervalUnit: text })}
               />
+              <Text style={Styles.label}>Número de Intervalos:</Text>
               <TextInput
-                placeholder="Número de Intervalos"
+                title="Número de Intervalos"
                 value={deal.intervalNumber?.toString()}
                 onChangeText={(text) => setDeal({ ...deal, intervalNumber: parseInt(text, 10) })}
                 keyboardType="numeric"

@@ -63,25 +63,27 @@ const UpdateStudent = () => {
              <View style={Styles.container}>
                 <View style={Styles.inputContainer}>
                     <VStack m={15} spacing={10}>
+                    <Text style={Styles.label}>Nome:</Text>
                      <TextInput
                        placeholder="Nome"
                        value={student.name}
                        onChangeText={(text) => setStudent({...student, name: text})}
 
                      />
+                     <Text style={Styles.label}>Celular:</Text>
                       <TextInput
                           placeholder="Celular"
                           value={student.phone}
                           onChangeText={(phone) => setStudent({...student, phone: phone})}
                           keyboardType="phone-pad"
                       />
-
+                      <Text style={Styles.label}>Data de Nascimento:</Text>
                       <TextInput
                            placeholder="Data de Nascimento"
                              value={student.birthDate}
                              onChangeText={(birthDate) => setStudent({...student, birthDate: birthDate})}
                       />
-
+                       <Text style={Styles.label}>Gênero:</Text>
                       <Text style={Styles.label}>Gênero:</Text>
                         <Picker
                           selectedValue={student.sex}
@@ -93,13 +95,14 @@ const UpdateStudent = () => {
                         <Picker.Item label="Masculino" value="M" />
                         </Picker>
 
+                      <Text style={Styles.label}>Altura (cm):</Text>
                       <TextInput
                        placeholder="Altura (cm)"
                        value={student.height?.toFixed(2)}
                        onChangeText={(height) => setStudent({...student, height: parseFloat(height)})}
                        keyboardType="numeric"
                       />
-
+                       <Text style={Styles.label}>Peso (kg):</Text>
                       <TextInput
                        placeholder="Peso (kg)"
                        value={student.weight?.toFixed(2)}
