@@ -21,6 +21,7 @@ const NewDeal = () => {
   const [endDate, setEndDate] = useState('');
   const [intervalUnit, setIntervalUnit] = useState('');
   const [intervalNumber, setIntervalNumber] = useState('');
+
   const [selectedModalities, setSelectedModalities] = useState<Modality[]>([]);
   const [checked, setChecked] = useState(false);
 
