@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { AppBar, Button, IconButton, TextInput, ListItem, Switch } from "@react-native-material/core";
@@ -9,6 +9,8 @@ import { Modality } from '@/app/models/modalityModel';
 import { createDeal } from '@/app/api/deal';
 import { useRouter } from 'expo-router';
 import { Deal } from '@/app/models/dealModel';
+import { getModalities } from '@/app/api/modality';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const NewDeal = () => {
   const router = useRouter();
@@ -19,8 +21,22 @@ const NewDeal = () => {
   const [endDate, setEndDate] = useState('');
   const [intervalUnit, setIntervalUnit] = useState('');
   const [intervalNumber, setIntervalNumber] = useState('');
-  const [selectedModalities, setSelectedModalities] = useState([]);
+  const [selectedModalities, setSelectedModalities] = useState<Modality[]>([]);
   const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const fetchModalities = async () => {
+      try {
+        const modalitiesList = await getModalities();
+        setSelectedModalities(modalitiesList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchModalities();
+  }, []);
+
 
   const handleCadastro = async () => {
     try {
@@ -49,6 +65,14 @@ const NewDeal = () => {
     } catch (error) {
       console.error(error);
       Alert.alert('Erro', 'Falha ao cadastrar plano');
+    }
+  };
+  
+  const handleCheckboxChange = (modality: Modality, isChecked: boolean) => {
+    if (isChecked) {
+      setSelectedModalities(prev => [...prev, modality]);
+    } else {
+      setSelectedModalities(prev => prev.filter(item => item.id !== modality.id));
     }
   };
 
@@ -120,17 +144,14 @@ const NewDeal = () => {
                 <Picker.Item label="Anos" value="anos" />
               </Picker>
               <Text style={Styles.label}>Modalidades inclusas no plano:</Text>
-              <ListItem
-                title="List Item"
-                trailing={
-                  <Switch value={checked} onValueChange={() => setChecked(!checked)} />
-                }
-                onPress={() => {
-                  const newSelectedModalities = checked ? [] : [/* Lista de modalidades selecionadas */];
-                  setSelectedModalities(newSelectedModalities);
-                  setChecked(!checked);
-                }}
-              />
+              {selectedModalities.map(modality => (
+                <BouncyCheckbox
+                  key={modality.id}
+                  text={modality.name}
+                  isChecked={selectedModalities.some(item => item.id === modality.id)}
+                  onPress={(isChecked: boolean) => handleCheckboxChange(modality, isChecked)}
+                />
+              ))}
               <Button
                 title="Cadastrar"
                 onPress={handleCadastro}
