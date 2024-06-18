@@ -6,7 +6,7 @@ import { Colors, Styles } from '@/constants';
 import Login from '@/app/(auth)/login';
 import CreateStudent from '@/app/screens/student/create-student'
 import NewEmployee from '@/app/screens/employee/new-employee'
-import NewActivity from '@/app/screens/activity/new-activity'
+import ListStudent from '@/app/screens/student/list-student'
 
 
 
@@ -24,7 +24,7 @@ const Home = () => {
         <Stack.Screen
           options={{headerStyle: {backgroundColor: Colors.white}, headerShown:false}}
         />
-        <NewActivity></NewActivity>
+        <ListStudent></ListStudent>
       </SafeAreaView>
     </>
   )
