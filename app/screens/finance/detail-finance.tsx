@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { AppBar, IconButton } from "@react-native-material/core";
+import { AppBar, Button, IconButton } from "@react-native-material/core";
 import { Styles } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { deleteFinance, getFinanceByStudentId } from '@/app/api/finance';
+import { deleteFinance, getFinanceByStudentId, updateFinance } from '@/app/api/finance';
 import { getStudentById } from '@/app/api/student';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Finance } from '@/app/models/financeModel';
@@ -12,7 +12,7 @@ const DetailFinance: React.FC = () => {
   const [finances, setFinances] = useState<Finance[]>([]);
   const [studentName, setStudentName] = useState<string>('');
   const router = useRouter();
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   useEffect(() => {
     const fetchStudentAndFinances = async () => {
@@ -52,10 +52,22 @@ const DetailFinance: React.FC = () => {
     ]);
   };
 
-  const handlePayment = (finances: Finance) => {
-    console.log('Mudando de tela:', finances.id);
-    // Aqui você pode adicionar a lógica de navegação
-    // navigation.navigate('Payment', { finances.id });
+  const handlePayment = (finance: Finance) => {
+    Alert.alert('Confirmar pagamento', `Tem certeza que deseja confirmar o pagamento da conta ${finance.id}?`, [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Confirmar',
+        onPress: async () => {
+          try {
+            const updatedFinance = { ...finance, amountPaid: finance.amountOwed };
+            await updateFinance(finance.id, updatedFinance);
+            setFinances(finances.map(f => f.id === finance.id ? updatedFinance : f));
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    ]);
   };
 
   return (
@@ -108,6 +120,12 @@ const DetailFinance: React.FC = () => {
                   />
                 </View>
               ))}
+              <View style={Styles.spacer} />
+              <Button title="Novo lançamento"
+                style={Styles.searchButton}
+                leading={props => <Icon name="plus" {...props}/>}
+                onPress={() => router.push(`/screens/finance/new-payment?id=${id}`)}
+              />
             </View>
           </View>
         </View>
