@@ -46,11 +46,11 @@ const NewModality = () => {
         leading={props => (
           <IconButton
             icon={props => <Icon name="arrow-left" {...props} />}
+            onPress={() => router.back()}
             {...props}
           />
         )}
       />
-      <ScrollView>
         <View style={Styles.container}>
           <View style={Styles.inputContainer}>
             <VStack m={15} spacing={10}>
@@ -77,7 +77,6 @@ const NewModality = () => {
             </VStack>
           </View>
         </View>
-      </ScrollView>
     </View>
   );
 };
