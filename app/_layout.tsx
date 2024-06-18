@@ -55,10 +55,12 @@ export default function RootLayout() {
 function RootLayoutNav() {
 
   return (
-      <Stack>
-        <Stack.Screen 
-          name='index'
-        />
+      <Stack screenOptions={{ headerShown: false }}>
+       <Stack.Screen name="index" />
+       <Stack.Screen name="home" />
+       <Stack.Screen name="students" />
+       <Stack.Screen name="finances" />
+       <Stack.Screen name="deals" />
       </Stack>
   );
 }

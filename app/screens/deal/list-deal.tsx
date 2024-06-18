@@ -48,8 +48,9 @@ const ListDeal: React.FC = ({}) => {
            style={Styles.appBar}
            leading={props => (
              <IconButton
-               icon={props => <Icon name="arrow-left" {...props} />}
-               {...props}/>
+              icon={props => <Icon name="arrow-left" {...props} />}
+              onPress={()=> router.pop()}
+              {...props}/>
            )}
         />
    <ScrollView>
@@ -57,7 +58,7 @@ const ListDeal: React.FC = ({}) => {
       <SafeAreaView style={Styles.listContainer}>
       <VStack m={15} spacing={10}>
         <TextInput
-            placeholder="Pesquisar Aluno"
+            placeholder="Pesquisar Plano"
             value={searchQuery}
             onChangeText={setSearchQuery}
         />

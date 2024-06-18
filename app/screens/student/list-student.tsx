@@ -59,12 +59,13 @@ const ListStudent : React.FC = () => {
     return (
       <View style={{ flex: 1 }}>
             <AppBar
-               title="Planos"
+               title="Alunos"
                style={Styles.appBar}
                leading={props => (
                  <IconButton
-                   icon={props => <Icon name="arrow-left" {...props} />}
-                   {...props}/>
+                      icon={props => <Icon name="arrow-left" {...props} />}
+                      onPress={()=> router.pop()}
+                      {...props}/>
                )}
       />
         <View style={Styles.container}>

@@ -129,10 +129,10 @@ export const Styles = StyleSheet.create({
     },
 
   appBar: {
-      height: 48,
+      height: 60,
       backgroundColor: Colors.primary,
       tintColor: Colors.white,
-      paddingVertical: 24,
+      paddingVertical: 48,
       alignItems: 'center',
       justifyContent: 'center',
     },
