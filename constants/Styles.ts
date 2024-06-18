@@ -42,6 +42,7 @@ export const Styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     marginTop: 20,
+    flex: 0.9
   },
 
   input: {
@@ -128,24 +129,12 @@ export const Styles = StyleSheet.create({
     },
 
   appBar: {
-      height: 56,
+      height: 48,
       backgroundColor: Colors.primary,
       tintColor: Colors.white,
-      paddingVertical: 60,
+      paddingVertical: 24,
       alignItems: 'center',
       justifyContent: 'center',
-    },
-
-  listContainer: {
-      padding: 16,
-      backgroundColor: 'white',
-      width: '100%',
-      borderRadius: 8,
-      shadowColor: 'black',
-      shadowOpacity: 0.1,
-      shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 4,
-      elevation: 2,
     },
 
   text: {

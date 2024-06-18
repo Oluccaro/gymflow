@@ -1,1 +1,1 @@
-export const API_URL = 'https://charming-dingo-chief.ngrok-free.app';
+export const API_URL =  'https://lucky-duck-needed.ngrok-free.app';

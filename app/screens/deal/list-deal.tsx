@@ -1,6 +1,5 @@
 import React, { useState, useEffect }from 'react';
 import { View, Text, StyleSheet, ScrollView,  SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import { AppBar, Button, IconButton, TextInput, ListItem  } from "@react-native-material/core";
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
 import { Styles, Images, Colors } from '@/constants';
