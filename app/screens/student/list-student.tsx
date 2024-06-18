@@ -59,7 +59,7 @@ const ListStudent : React.FC = () => {
     return (
       <View style={{ flex: 1 }}>
             <AppBar
-               title="Planos"
+               title="Alunos"
                style={Styles.appBar}
                leading={props => (
                  <IconButton

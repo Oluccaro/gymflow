@@ -12,7 +12,7 @@ const DetailFinance: React.FC = () => {
   const [finances, setFinances] = useState<Finance[]>([]);
   const [studentName, setStudentName] = useState<string>('');
   const router = useRouter();
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   useEffect(() => {
     const fetchStudentAndFinances = async () => {

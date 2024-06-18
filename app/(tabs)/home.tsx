@@ -39,7 +39,7 @@ const HomeScreen =() => {
           <HStack spacing={12}>
             <Button title="Financeiro"
             style={[Styles.button]}
-            onPress={()=> handlePress('/screens/finance/detail-finance?2')}
+            onPress={()=> handlePress('/screens/finance/list-finance')}
             />
           </HStack>
           </VStack>
