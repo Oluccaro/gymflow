@@ -5,7 +5,7 @@ import { AppBar, Button, IconButton, TextInput  } from "@react-native-material/c
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
 import { Styles, Images, Colors } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Router, Scene } from 'expo-router';
+// import { Router, Scene } from 'expo-router';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const NewActivity = () => {

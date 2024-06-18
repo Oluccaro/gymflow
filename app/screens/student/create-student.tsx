@@ -1,22 +1,21 @@
 import React, { useState }from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { AppBar, Button, IconButton, TextInput  } from "@react-native-material/core";
-import { Stack, HStack, VStack } from 'react-native-flex-layout';
-import { Styles, Images, Colors } from '@/constants';
-import { useNavigation } from '@react-navigation/native';
-import { Router, Scene } from 'expo-router';
+import { VStack } from 'react-native-flex-layout';
+import { Styles } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useRouter } from 'expo-router';
 
 const CreateStudent = () => {
-
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [sex, setSex] = useState('');
-  const [height, setHeight] = useState('');
-  const [weight, setWeight] = useState('');
-  const [plano, setPlano] = useState('');
+    const router = useRouter();
+    const [name, setName] = useState('');
+      const [phone, setPhone] = useState('');
+      const [birthDate, setBirthDate] = useState('');
+      const [sex, setSex] = useState('');
+      const [height, setHeight] = useState('');
+      const [weight, setWeight] = useState('');
+      const [plano, setPlano] = useState('');
 
  const handleCadastro = () => {
     // Lógica para manipular o cadastro
@@ -37,7 +36,8 @@ const CreateStudent = () => {
                 leading={props => (
                   <IconButton
                     icon={props => <Icon name="arrow-left" {...props} />}
-                    {...props}/>
+                    {...props}
+                    />
                 )}
          />
          <ScrollView>
