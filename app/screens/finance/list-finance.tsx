@@ -30,6 +30,7 @@ const ListFinance = () => {
         <ListItem
               title={item.student.name}
               secondaryText={`clique para detalhes`}
+              onPress={() => router.push(`/screens/finance/detail-finance?id=${item.student.id}`)}
               trailing={props => (
                     <Stack fill center spacing={3}>
                         <IconButton
@@ -50,7 +51,7 @@ const ListFinance = () => {
                  leading={props => (
                    <IconButton
                      icon={props => <Icon name="arrow-left" {...props} />}
-                     //onPress={() => router.pop()}
+                     onPress={() => router.back()}
                      {...props}/>
                  )}
         />
