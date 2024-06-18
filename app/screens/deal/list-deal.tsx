@@ -4,13 +4,12 @@ import { AppBar, Button, IconButton, TextInput, ListItem  } from "@react-native-
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
 import { Styles, Images, Colors } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Router, Scene } from 'expo-router';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import studentData from '@/assets/students.json';
 
 
 
-const ListDeal = ({}) => {
+const ListDeal: React.FC = ({}) => {
   const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
