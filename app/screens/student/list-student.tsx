@@ -73,7 +73,7 @@ const ListStudent : React.FC = () => {
             <Button title="Adicionar"
                style={Styles.searchButton}
                leading={props => <Icon name="plus" {...props}/>}
-              // onPress={} adicionar caminho para Cadastro
+               onPress={()=>router.push('/screens/student/create-student')} 
             />
             <FlatList
                 data={students}

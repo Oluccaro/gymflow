@@ -1,137 +1,140 @@
-import React, { useState }from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { AppBar, Button, IconButton, TextInput, ListItem, Switch  } from "@react-native-material/core";
-import { Stack, HStack, VStack } from 'react-native-flex-layout';
-import { Styles, Images, Colors } from '@/constants';
-import { useNavigation } from '@react-navigation/native';
-import { router } from 'expo-router';
+import { AppBar, Button, IconButton, TextInput } from "@react-native-material/core";
+import { VStack } from 'react-native-flex-layout';
+import { Styles, Colors } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-// import ListModality from '@app/screens/modality/list-modality';
-
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Deal } from '@/app/models/dealModel';
+import { getDealById, updateDeal } from '@/app/api/deal';
+import { getModalities } from '@/app/api/modality';
+import { Modality } from '@/app/models/modalityModel';
 
 const UpdateDeal = () => {
-    const [description, setDescription ] = useState('');
-      const [price, setPrice] = useState('');
-      const [chargeInterval, setChargeInterval] = useState('');
-      const [startDate, setStartDate] = useState('');
-      const [endDate, setEndDate] = useState('');
-      const [intervalUnit, setIntervalUnit] = useState('');
-      const [intervalNumber, setIntervalNumber] = useState('');
-      const [modalities, setModalities] = useState([]);
-      const [checked, setChecked] = useState(false);
+  const [deal, setDeal] = useState<Partial<Deal>>({});
+  const [modalities, setModalities] = useState<Modality[]>([]);
+  const router = useRouter();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
-    //useEffect(() => {
-    //  loadModalidades();
-   // }, []);
+  useEffect(() => {
+    const fetchDeal = async () => {
+      try {
+        const dealData = await getDealById(Number(id));
+        setDeal(dealData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-   // const loadModalities = async () => {
-   //   const modalitiesLoaded = await listModalities();
-   //   setModality(modalitiesLoaded);
-  //  };
+    const fetchModalities = async () => {
+      try {
+        const modalitiesList = await getModalities();
+        setModalities(modalitiesList);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    const handleCadastro = () => {
-        console.log('description: ', description);
-         console.log('price: ', price);
-         console.log('chargeInterval: ', chargeInterval);
-         console.log('startDate: ', startDate);
-         console.log('endDate: ', endDate);
-         console.log('intervalUnit: ', intervalUnit);
-         console.log('intervalNumber: ', intervalNumber);
-         console.log('modalities: ', modalities);
-      };
+    if (id) {
+      fetchDeal();
+      fetchModalities();
+    }
+  }, [id]);
+
+  const handleSave = async () => {
+    try {
+      if (id) {
+        await updateDeal(Number(id), deal);
+        Alert.alert('Success', 'Deal updated successfully');
+        router.replace('/screens/deal/list-deal');
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Failed to update deal');
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
-         <AppBar
-            title="Novo Plano"
-            style={Styles.appBar}
-            leading={props => (
-                  <IconButton
-                    icon={props => <Icon name="arrow-left" {...props} />}
-                    {...props}/>
-                )}
-         />
-         <ScrollView>
-             <View style={Styles.container}>
-                <View style={Styles.inputContainer}>
-                    <VStack m={15} spacing={10}>
-                     <TextInput
-                        placeholder="Descrição"
-                        value={description}
-                        onChangeText={setDescription}
-
-                     />
-                      <TextInput
-                          placeholder="Preço"
-                          value={price}
-                          onChangeText={setPrice}
-                          keyboardType="numeric"
-                      />
-
-                     <Text style={Styles.label}>Intervalo de Cobrança:</Text>
-                     <Picker
-                          selectedValue={chargeInterval}
-                          onValueChange={(itemValue) => setChargeInterval(itemValue)}
-                          style={Styles.picker}
-                     >
-                          <Picker.Item label="Selecione um intervalo" value="" />
-                          <Picker.Item label="Mensal" value="mensal" />
-                          <Picker.Item label="Trimestral" value="trimestral" />
-                          <Picker.Item label="Anual" value="anual" />
-                     </Picker>
-
-                      <Text style={Styles.label}>Validade do Plano:</Text>
-                      <TextInput
-                           placeholder="Valido de"
-                           value={startDate}
-                           onChangeText={setStartDate}
-                      />
-                      <TextInput
-                             placeholder="Valido até"
-                             value={endDate}
-                             onChangeText={setEndDate}
-                      />
-
-                      <Text style={Styles.label}>Selecione o período de vigência do plano, que contará a partir da data de confirmação:</Text>
-
-                          <TextInput
-                           placeholder="Número"
-                           value={intervalNumber}
-                           onChangeText={setIntervalNumber}
-                           keyboardType="numeric"
-                          />
-                         <Picker
-                              selectedValue={intervalUnit}
-                              onValueChange={(itemValue) => setIntervalUnit(itemValue)}
-                              style={Styles.picker}
-                         >
-                         <Picker.Item label="Selecione o período" value="" />
-                         <Picker.Item label="Dias" value="dias" />
-                         <Picker.Item label="Meses" value="meses" />
-                         <Picker.Item label="Anos" value="anos" />
-
-                         </Picker>
-
-                      <Text style={Styles.label}>Modalidades inclusas no plano:</Text>
-                          <ListItem
-                                title="List Item"
-                                trailing={
-                                  <Switch value={checked} onValueChange={() => setChecked(!checked)} />
-                                }
-                                onPress={() => setChecked(!checked)}
-                              />
-                      <Button
-                          title="Editar"
-                          onPress={handleCadastro}
-                          style={[Styles.mainButton]}
-                      />
-                    </VStack>
-                </View>
-             </View>
-         </ScrollView>
+      <AppBar
+        title="Editar Deal"
+        style={Styles.appBar}
+        leading={props => (
+          <IconButton
+            icon={props => <Icon name="arrow-left" {...props} />}
+            onPress={() => router.back()}
+            {...props}
+          />
+        )}
+      />
+      <ScrollView>
+        <View style={Styles.container}>
+          <View style={Styles.inputContainer}>
+            <VStack m={15} spacing={10}>
+              <TextInput
+                placeholder="Descrição"
+                value={deal.description}
+                onChangeText={(text) => setDeal({ ...deal, description: text })}
+              />
+              <TextInput
+                placeholder="Preço"
+                value={deal.price?.toFixed(2)}
+                onChangeText={(text) => setDeal({ ...deal, price: parseFloat(text) })}
+                keyboardType="numeric"
+              />
+              <TextInput
+                placeholder="Intervalo de Cobrança (dias)"
+                value={deal.chargeInterval?.toString()}
+                onChangeText={(text) => setDeal({ ...deal, chargeInterval: parseInt(text, 10) })}
+                keyboardType="numeric"
+              />
+              <TextInput
+                placeholder="Data de Início"
+                value={deal.startDate}
+                onChangeText={(text) => setDeal({ ...deal, startDate: text })}
+              />
+              <TextInput
+                placeholder="Data de Término"
+                value={deal.endDate}
+                onChangeText={(text) => setDeal({ ...deal, endDate: text })}
+              />
+              <TextInput
+                placeholder="Unidade de Intervalo"
+                value={deal.intervalUnit}
+                onChangeText={(text) => setDeal({ ...deal, intervalUnit: text })}
+              />
+              <TextInput
+                placeholder="Número de Intervalos"
+                value={deal.intervalNumber?.toString()}
+                onChangeText={(text) => setDeal({ ...deal, intervalNumber: parseInt(text, 10) })}
+                keyboardType="numeric"
+              />
+              <Text style={Styles.label}>Modalidade:</Text>
+              <Picker
+                selectedValue={deal.modalities?.[0]?.id}
+                onValueChange={(value) => {
+                  const selectedModality = modalities.find(mod => mod.id === value);
+                  setDeal({ ...deal, modalities: selectedModality ? [selectedModality] : [] });
+                }}
+                style={Styles.picker}
+              >
+                <Picker.Item label="Selecione uma modalidade" value="" />
+                {modalities.map((modality) => (
+                  <Picker.Item key={modality.id} label={modality.name} value={modality.id} />
+                ))}
+              </Picker>
+              <Button
+                title="Salvar"
+                onPress={handleSave}
+                style={[Styles.mainButton]}
+              />
+            </VStack>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
-export default UpdateDeal
+export default UpdateDeal;
