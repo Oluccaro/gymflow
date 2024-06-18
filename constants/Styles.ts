@@ -26,6 +26,23 @@ export const Styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
+  
+  spacer: {
+    height: 20, // Ajuste a altura do espaçamento conforme necessário
+  },
+
+  listContainer: {
+    width: '100%',
+    padding: 16,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 2,
+    marginTop: 20,
+  },
 
   input: {
       height: 56,
