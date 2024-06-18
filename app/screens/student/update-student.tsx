@@ -39,7 +39,7 @@ const UpdateStudent = () => {
       if (id) {
         const updatedStudent = await updateStudent(Number(id), student);
         Alert.alert('Success', 'Student updated successfully');
-        router.replace('/screens/students/StudentListScreen'); // Navigate back to student list
+        router.replace('/screens/student/list-student'); // Navigate back to student list
       }
     } catch (error) {
       console.error(error);
@@ -50,11 +50,12 @@ const UpdateStudent = () => {
   return (
     <View style={{ flex: 1 }}>
          <AppBar
-            title="Novo Aluno"
+            title="Editar Aluno"
             style={Styles.appBar}
                 leading={props => (
                   <IconButton
                     icon={props => <Icon name="arrow-left" {...props} />}
+                    onPress={()=> router.back()}
                     {...props}/>
                 )}
          />
