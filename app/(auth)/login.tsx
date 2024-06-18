@@ -1,29 +1,37 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, Button, Image, TouchableOpacity, Pressable} from 'react-native';
+import { View, Text, TextInput, Image, Pressable, Alert} from 'react-native';
 import { CheckBox } from 'react-native-elements';
-import { Styles, Icons, Images, Colors } from '@/constants';
-import { Link } from 'expo-router';
+import { Styles, Images, Colors } from '@/constants';
+import { Link, useRouter } from 'expo-router';
+import { login } from '../api/login';
 
-export default function Login() {
 
-  const [username, setUsername] = useState('');
+
+
+const Login: React.FC = () => {
+
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  
-  const handleLogin = () =>{
-    console.log('username: ', username);
-    console.log('password: ', password);
-    console.log('remember Me: ', rememberMe);
-  }  
+  const router = useRouter();
+
+  const handleLogin = async () =>{
+    try {
+      // await login({email, password});
+      router.replace('/home')
+    } catch (error: any) {
+      Alert.alert('Login Error' + error.message);
+    }
+  };
 
   return (
     <View style={Styles.container}>
     <Image source={Images.gymflowLogo} style={Styles.image} />
     <View style={Styles.inputContainer}>
       <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
         style={Styles.input}
       />
       <Text></Text>
@@ -52,8 +60,10 @@ export default function Login() {
       {/* <TouchableOpacity onPress={() => console.log('Navigate to Register screen')}>
         <Text style={Styles.registerText}>Register</Text>
       </TouchableOpacity> */}
-      <Link href="/home" style={{color: Colors.primary}}>Register</Link>
+      <Link href="/register" style={{color: Colors.primary}}>Register</Link>
     </View>
   </View>      
   );
 }
+
+export default Login;

@@ -5,9 +5,9 @@ import { AppBar, Button, IconButton, TextInput, ListItem, Switch  } from "@react
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
 import { Styles, Images, Colors } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Router, Scene } from 'expo-router';
+import { router } from 'expo-router';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import ListModality from '@app/screens/modality/list-modality';
+// import ListModality from '@app/screens/modality/list-modality';
 
 
 const UpdateDeal = () => {
@@ -38,7 +38,7 @@ const UpdateDeal = () => {
          console.log('endDate: ', endDate);
          console.log('intervalUnit: ', intervalUnit);
          console.log('intervalNumber: ', intervalNumber);
-         console.log('modalities: ', selactedModalities);
+         console.log('modalities: ', modalities);
       };
 
   return (

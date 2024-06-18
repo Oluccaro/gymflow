@@ -1,35 +1,51 @@
-export default UpdateStudent
-
-import React, { useState }from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState }from 'react';
+import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { AppBar, Button, IconButton, TextInput  } from "@react-native-material/core";
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
 import { Styles, Images, Colors } from '@/constants';
 import { useNavigation } from '@react-navigation/native';
-import { Router, Scene } from 'expo-router';
+// import { Router, Scene } from 'expo-router';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Student } from '@/app/models/StudentModel';
+import { getStudentById, updateStudent } from '@/app/api/student';
 
 const UpdateStudent = () => {
-
-    const [name, setName] = useState('');
-      const [phone, setPhone] = useState('');
-      const [birthDate, setBirthDate] = useState('');
-      const [sex, setSex] = useState('');
-      const [height, setHeight] = useState('');
-      const [weight, setWeight] = useState('');
-      const [plano, setPlano] = useState('');
-
-     const handleCadastro = () => {
-        // Lógica para manipular o cadastro
-        console.log('name: ', name);
-         console.log('phone: ', phone);
-         console.log('birthDate: ', birthDate);
-         console.log('sex: ', sex);
-         console.log('height: ', height);
-         console.log('weight: ', weight);
-         console.log('plano: ', plano);
+    const [student, setStudent] = useState<Partial<Student>>({});
+    const router = useRouter();
+    const { id } = useLocalSearchParams<{ id: string }>();
+    const [plano, setPlano] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    useEffect(() => {
+      const fetchStudent = async () => {
+        try {
+          const studentData = await getStudentById(Number(id)); // Fetch student data using id
+          setStudent(studentData);
+        } catch (error) {
+          console.error(error);
+        }
       };
+  
+      if (id) {
+        fetchStudent();
+      }
+    }, [id]);
+    console.log(student);
+
+    const handleSave = async () => {
+    try {
+      if (id) {
+        const updatedStudent = await updateStudent(Number(id), student);
+        Alert.alert('Success', 'Student updated successfully');
+        router.replace('/screens/students/StudentListScreen'); // Navigate back to student list
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Failed to update student');
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -48,27 +64,27 @@ const UpdateStudent = () => {
                     <VStack m={15} spacing={10}>
                      <TextInput
                        placeholder="Nome"
-                       value={name}
-                       onChangeText={setName}
+                       value={student.name}
+                       onChangeText={(text) => setStudent({...student, name: text})}
 
                      />
                       <TextInput
                           placeholder="Celular"
-                          value={phone}
-                          onChangeText={setPhone}
+                          value={student.phone}
+                          onChangeText={(phone) => setStudent({...student, phone: phone})}
                           keyboardType="phone-pad"
                       />
 
                       <TextInput
                            placeholder="Data de Nascimento"
-                             value={birthDate}
-                             onChangeText={setBirthDate}
+                             value={student.birthDate}
+                             onChangeText={(birthDate) => setStudent({...student, birthDate: birthDate})}
                       />
 
                       <Text style={Styles.label}>Gênero:</Text>
                         <Picker
-                          selectedValue={sex}
-                          onValueChange={(itemValue) => setSex(itemValue)}
+                          selectedValue={student.sex}
+                          onValueChange={(sex) => setStudent({...student, sex: sex})}
                           style={Styles.picker}
                         >
                         <Picker.Item label="Selecione o gênero" value="" />
@@ -78,15 +94,15 @@ const UpdateStudent = () => {
 
                       <TextInput
                        placeholder="Altura (cm)"
-                       value={height}
-                       onChangeText={setHeight}
+                       value={student.height?.toFixed(2)}
+                       onChangeText={(height) => setStudent({...student, height: parseFloat(height)})}
                        keyboardType="numeric"
                       />
 
                       <TextInput
                        placeholder="Peso (kg)"
-                       value={weight}
-                       onChangeText={setWeight}
+                       value={student.weight?.toFixed(2)}
+                       onChangeText={(weight) => setStudent({...student, weight: parseFloat(weight)})}
                        keyboardType="numeric"
                      />
 
@@ -103,7 +119,7 @@ const UpdateStudent = () => {
                      </Picker>
                      <Button
                        title="Editar"
-                       onPress={handleCadastro}
+                       onPress={handleSave}
                        style={[Styles.mainButton]}
                      />
                     </VStack>
