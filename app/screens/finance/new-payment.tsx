@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { AppBar, IconButton, TextInput, Button } from "@react-native-material/core";
+import { AppBar, IconButton, TextInput, Button, Avatar, HStack, Spacer   } from "@react-native-material/core";
 import { VStack } from 'react-native-flex-layout';
 import { Styles } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -59,26 +59,26 @@ const NewPayment = () => {
           />
         )}
       />
-      <ScrollView>
         <View style={Styles.container}>
           <View style={Styles.inputContainer}>
             <VStack m={15} spacing={10}>
               {student && (
                 <View style={styles.profileContainer}>
-                  <IconButton
-                    icon={() => <Icon name="account-circle" size={60} />}
-                  />
+                <HStack m={4} spacing={6}>
+                  <Avatar icon={props => <Icon name="account" {...props} />} />
+                  <Spacer style={{flex:0.3}} />
                   <View>
                     <Text style={[styles.subtitle, { color: 'gray' }]}>Nome do titular</Text>
                     <Text style={styles.title}>{student.name}</Text>
                   </View>
+                 </HStack>
                 </View>
               )}
             </VStack>
           </View>
           <Text style={[styles.title, { color: 'white', alignContent: 'flex-start' }]}>DETALHES</Text>
           <View style={Styles.inputContainer}>
-            <VStack m={15} spacing={10}>
+            <VStack m={15} spacing={16}>
               <TextInput
                 placeholder="Data de vencimento (00/00/0000)"
                 value={dueDate}
@@ -104,7 +104,6 @@ const NewPayment = () => {
             </VStack>
           </View>
         </View>
-      </ScrollView>
     </View>
   );
 };

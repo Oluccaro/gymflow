@@ -1,3 +1,4 @@
+
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { Tabs, Redirect} from 'expo-router'
@@ -18,22 +19,22 @@ const TabIcon = ({icon, color, name, focused} : {icon :any, color: any, name: an
 }
 
 const tabs = [
-  { 
+  {
     name: "home",
     icon: Icons.home,
     title: "Home"
   },
-  { 
+  {
     name: "students",
     icon: Icons.profile,
     title: "Alunos"
   },
-  { 
+  {
     name: "finances",
     icon: Icons.finances,
     title: "Financeiro"
   },
-  { 
+  {
     name: "deals",
     icon: Icons.deal,
     title: "Planos"
@@ -64,7 +65,7 @@ tabs.forEach(tab => {
 const TabsLayout = () => {
   return (
     <>
-      <Tabs 
+      <Tabs
         screenOptions={{
           tabBarShowLabel: false,
           tabBarActiveTintColor: Colors.primary,
@@ -74,7 +75,7 @@ const TabsLayout = () => {
             borderTopColor: Colors.backgroundMain,
             height: 60
           }
-        }} 
+        }}
       >
         {tabsScreen}
       </Tabs>

@@ -18,12 +18,6 @@ const HomeScreen =() => {
    <AppBar
                   title="Home"
                   style={Styles.appBar}
-                  leading={props => (
-                    <IconButton
-                      icon={props => <Icon name="blank" {...props} />}
-                      onPress={()=> router.back()}
-                      {...props}/>
-                  )}
          />
    <View style={Styles.container}>
         <VStack m={20} spacing={12}>

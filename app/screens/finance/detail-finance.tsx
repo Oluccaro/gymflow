@@ -83,15 +83,15 @@ const DetailFinance: React.FC = () => {
           />
         )}
       />
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={Styles.container}>
           <View style={Styles.inputContainer}>
             <Text style={styles.title}>{studentName}</Text>
             <Text style={styles.subtitle}>Contas</Text>
-            <View style={styles.listContainer}>
+              <View style={styles.listContainer}>
               {finances.map((finance, index) => (
-                <View key={index} style={styles.listItem}>
-                  <View style={styles.financeDetails}>
+               <View key={index} style={styles.listItem}>
+                 <View style={styles.financeDetails}>
                     <View style={styles.idContainer}>
                       <View style={styles.left}>
                         <Icon name="receipt" style={styles.icon} />
@@ -113,12 +113,12 @@ const DetailFinance: React.FC = () => {
                         <Text style={styles.payButtonText}>Pagar</Text>
                       </TouchableOpacity>
                     )}
-                  </View>
+                 </View>
                   <IconButton
                     icon={props => <Icon name="delete" {...props} />}
                     onPress={() => handleDelete(finance.id)}
                   />
-                </View>
+              </View>
               ))}
               <View style={Styles.spacer} />
               <Button title="Novo lançamento"
