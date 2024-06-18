@@ -7,6 +7,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRouter } from 'expo-router';
 import { deleteStudent, getStudents } from '@/app/api/student';
 import { Student } from '@/app/models/StudentModel';
+import TabsLayout from '@/app/(tabs)/_layout';
 
 const ListStudent : React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);
