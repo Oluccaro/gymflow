@@ -16,42 +16,36 @@ const HomeScreen =() => {
   return (
   <View style={{ flex: 1 }}>
    <AppBar
-                  title="Alunos"
+                  title="Home"
                   style={Styles.appBar}
                   leading={props => (
                     <IconButton
-                      icon={props => <Icon name="arrow-left" {...props} />}
-                      onPress={()=> router.pop()}
+                      icon={props => <Icon name="blank" {...props} />}
+                      onPress={()=> router.back()}
                       {...props}/>
                   )}
          />
    <View style={Styles.container}>
         <VStack m={20} spacing={12}>
           <HStack spacing={14}>
-              <Button title="Menu"
+              <Button title="Alunos"
               style={[Styles.button]}
               onPress={() => handlePress('/screens/student/list-student')}
               />
+              <Button title="Modalidades"
+              style={[Styles.button]}
+              onPress={()=>handlePress('/screens/modality/list-modality')}
+              />
+          </HStack>
+          <HStack spacing={12}>
               <Button title="Planos"
               style={[Styles.button]}
               onPress={()=> handlePress('/screens/deal/list-deal')}
               />
-          </HStack>
-          <HStack spacing={12}>
-              <Button title="Atividades"
+              <Button title="Financeiro"
               style={[Styles.button]}
-              onPress={()=>handlePress('/screens/activity/list-activity')}
+              onPress={()=> handlePress('/screens/finance/list-finance')}
               />
-              <Button title="Funcionários"
-              style={[Styles.button]}
-              onPress={() => handlePress('/screens/employee/list-employee')}
-              />
-          </HStack>
-          <HStack spacing={12}>
-            <Button title="Financeiro"
-            style={[Styles.button]}
-            onPress={()=> handlePress('/screens/finance/list-finance')}
-            />
           </HStack>
           </VStack>
           <VStack m={40} spacing={10}>
@@ -61,11 +55,6 @@ const HomeScreen =() => {
                 leading={props => <Icon name="plus" {...props}/>}
                 onPress={()=>handlePress('/screens/student/create-student')}  
               />
-              <Button title="Pagamento"
-              style={[Styles.pillButton]}
-              leading={props => <Icon name="plus" {...props}/>}
-              onPress={()=>handlePress('/screens/finance/new-payment')}
-            />
           </HStack>
        </VStack>
    </View>
