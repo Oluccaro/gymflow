@@ -66,6 +66,8 @@ const NewActivity = () => {
                        style={[Styles.mainButton]}
                      />
 
+                    <Text style={Styles.label}>Horário:</Text>
+
                     <Picker
                           selectedValue={dayOfTheWeek}
                           onValueChange={(itemValue) => setDayOfTheWeek(itemValue)}
@@ -87,12 +89,31 @@ const NewActivity = () => {
                           style={Styles.picker}
                     >
                     <Picker.Item label="Repete a cada" value="" />
-                    <Picker.Item label="1 dias1" value="1" />
+                    <Picker.Item label="1 dia" value="1" />
                     <Picker.Item label="2 dias" value="2" />
                     <Picker.Item label="7 dias" value="7" />
                     <Picker.Item label="15 dias" value="15"/>
                     <Picker.Item label="30 dias" value="30"/>
                     </Picker>
+
+                    <Picker
+                          selectedValue={employee}
+                          onValueChange={(itemValue) => setEmployee(itemValue)}
+                          style={Styles.picker}
+                    >
+                    <Picker.Item label="Selecione o professor" value="" />
+                    </Picker>
+
+                    <TextInput
+                         placeholder="Horário de Início"
+                         value={startTime}
+                         onChangeText={setStartTime}
+                    />
+                    <TextInput
+                         placeholder="Horário de Término"
+                         value={endTime}
+                         onChangeText={setEndTime}
+                    />
                      <Button
                        title="Cadastrar"
                        onPress={handleCadastro}

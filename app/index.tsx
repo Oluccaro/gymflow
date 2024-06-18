@@ -11,6 +11,7 @@ import CheckPayment from './screens/finance/check-payment';
 import ListFinance from './screens/finance/list-finance';
 import DetailFinance from './screens/finance/detail-finance';
 import NewPayment from './screens/finance/new-payment';
+import ListStudent from '@/app/screens/student/list-student'
 
 
 const Home = () => {
@@ -26,7 +27,7 @@ const Home = () => {
         <Stack.Screen
           options={{headerStyle: {backgroundColor: Colors.white}, headerShown:false}}
         />
-        <ListFinance></ListFinance>
+        <ListStudent></ListStudent>
       </SafeAreaView>
     </>
   )

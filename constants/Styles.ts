@@ -136,8 +136,47 @@ export const Styles = StyleSheet.create({
       justifyContent: 'center',
     },
 
-  scrollViewContent: {
+  listContainer: {
+      padding: 16,
+      backgroundColor: 'white',
+      width: '100%',
+      borderRadius: 8,
+      shadowColor: 'black',
+      shadowOpacity: 0.1,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 4,
+      elevation: 2,
     },
+
+  text: {
+    fontSize: 16,
+    marginBottom: 2,
+  },
+
+  noData: {
+      padding: 20,
+      alignItems: 'center',
+    },
+
+  nome: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: 'red',
+      },
+
+  searchButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 4,
+        paddingHorizontal: 16,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: Colors.primary,
+        marginBottom: 10,
+
+  },
+
 
 });
 
