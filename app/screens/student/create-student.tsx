@@ -10,24 +10,24 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const CreateStudent = () => {
 
-    const [name, setName] = useState('');
-      const [phone, setPhone] = useState('');
-      const [birthDate, setBirthDate] = useState('');
-      const [sex, setSex] = useState('');
-      const [height, setHeight] = useState('');
-      const [weight, setWeight] = useState('');
-      const [plano, setPlano] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [sex, setSex] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [plano, setPlano] = useState('');
 
-     const handleCadastro = () => {
-        // Lógica para manipular o cadastro
-        console.log('name: ', name);
-         console.log('phone: ', phone);
-         console.log('birthDate: ', birthDate);
-         console.log('sex: ', sex);
-         console.log('height: ', height);
-         console.log('weight: ', weight);
-         console.log('plano: ', plano);
-      };
+ const handleCadastro = () => {
+    // Lógica para manipular o cadastro
+    console.log('name: ', name);
+     console.log('phone: ', phone);
+     console.log('birthDate: ', birthDate);
+     console.log('sex: ', sex);
+     console.log('height: ', height);
+     console.log('weight: ', weight);
+     console.log('plano: ', plano);
+  };
 
   return (
     <View style={{ flex: 1 }}>

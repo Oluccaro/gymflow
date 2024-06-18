@@ -51,8 +51,7 @@ const UpdateModality = () => {
                       <TextInput
                            placeholder="Benefícios"
                            value={healthBenefits}
-
-                           onChangeText={healthBenefits}
+                           onChangeText={setHealthBenefits}
                       />
                       <Button
                            title="Editar"
