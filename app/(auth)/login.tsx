@@ -17,7 +17,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async () =>{
     try {
-      // await login({email, password});
+      await login({"email": email,"password": password});
       router.replace('/home')
     } catch (error: any) {
       Alert.alert('Login Error' + error.message);
