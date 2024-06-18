@@ -14,7 +14,6 @@ const Home = () => {
       <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="home" component={HomeScreen} />
-        <Stack.Screen name="student" component={CreateStudent}/>
       </Stack.Navigator>
   )
 }
