@@ -1,33 +1,61 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { AppBar, IconButton } from "@react-native-material/core";
 import { Styles } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { deleteFinance, getFinanceByStudentId } from '@/app/api/finance';
+import { getStudentById } from '@/app/api/student';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { Finance } from '@/app/models/financeModel';
 
-const DetailFinance = () => {
-  //const route = useRoute();
-  //const navigation = useNavigation();
-  //const { name } = route.params;
-  const name = 'Alice Smith';  // Nome do aluno
+const DetailFinance: React.FC = () => {
+  const [finances, setFinances] = useState<Finance[]>([]);
+  const [studentName, setStudentName] = useState<string>('');
+  const router = useRouter();
+  const { id } = useLocalSearchParams();
 
-  const finances = [
-      { id: 1, dueDate: '2024-07-01', amountOwed: 100, amountPaid: 50 },
-      { id: 2, dueDate: '2024-08-01', amountOwed: 200, amountPaid: 200 },
-      { id: 3, dueDate: '2024-09-01', amountOwed: 150, amountPaid: 100 },
-  ];
+  useEffect(() => {
+    const fetchStudentAndFinances = async () => {
+      try {
+        if (typeof id === 'string') {
+          const student = await getStudentById(parseInt(id));
+          setStudentName(student.name);
+          const financesList = await getFinanceByStudentId(parseInt(id));
+          setFinances(financesList);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const handleDelete = (id) => {
-      Alert.alert('Excluir', `Tem certeza que deseja excluir a conta ${id}?`, [
-          { text: 'Cancelar', style: 'cancel' },
-          { text: 'Excluir', onPress: () => console.log('Excluído:', id) }
-      ]);
+    fetchStudentAndFinances();
+  }, [id]);
+
+  const handlePress = (path: string) => {
+    router.push(path);
   };
 
-  const handlePayment = (finances) => {
+  const handleDelete = async (id: number) => {
+    Alert.alert('Excluir', `Tem certeza que deseja excluir a conta ${id}?`, [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Excluir',
+        onPress: async () => {
+          try {
+            await deleteFinance(id);
+            setFinances(finances.filter(finance => finance.id !== id));
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    ]);
+  };
+
+  const handlePayment = (finances: Finance) => {
     console.log('Mudando de tela:', finances.id);
-      // Aqui você pode adicionar a lógica de navegação
-      //navigation.navigate('Payment', { finances.id });
+    // Aqui você pode adicionar a lógica de navegação
+    // navigation.navigate('Payment', { finances.id });
   };
 
   return (
@@ -39,14 +67,14 @@ const DetailFinance = () => {
           <IconButton
             icon={props => <Icon name="arrow-left" {...props} />}
             {...props}
-            //onPress={() => navigation.goBack()}
+            onPress={() => router.back()}
           />
         )}
       />
       <ScrollView>
         <View style={Styles.container}>
           <View style={Styles.inputContainer}>
-            <Text style={styles.title}>{name}</Text>
+            <Text style={styles.title}>{studentName}</Text>
             <Text style={styles.subtitle}>Contas</Text>
             <View style={styles.listContainer}>
               {finances.map((finance, index) => (
