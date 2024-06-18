@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CreateStudent from './screens/student/create-student';
 
 
-
 const Stack = createNativeStackNavigator();
 
 const Home = () => {

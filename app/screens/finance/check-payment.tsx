@@ -4,7 +4,7 @@ import React from 'react'
 const CheckPayment = () => {
   return (
     <View>
-      <Text>CheckPayment</Text>
+      <Text>NÃO PRECISA IMPLEMENTAR</Text>
     </View>
   )
 }
