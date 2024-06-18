@@ -64,6 +64,7 @@ const ListFinance = () => {
                />
             </SafeAreaView>
           </View>
+
         </View>
       );
   };

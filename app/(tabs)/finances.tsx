@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native'
+import ListFinance from '../screens/finance/list-finance'
 import React from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+const Stack = createNativeStackNavigator();
 
 const Finances = () => {
   return (
-    <View>
-      <Text>Finances</Text>
-    </View>
+   <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
+         <Stack.Screen name='list-finance' component={ListFinance}/>
+    </Stack.Navigator>
   )
 }
 

@@ -63,8 +63,9 @@ const ListStudent : React.FC = () => {
                style={Styles.appBar}
                leading={props => (
                  <IconButton
-                   icon={props => <Icon name="arrow-left" {...props} />}
-                   {...props}/>
+                      icon={props => <Icon name="arrow-left" {...props} />}
+                      onPress={()=> router.pop()}
+                      {...props}/>
                )}
       />
         <View style={Styles.container}>

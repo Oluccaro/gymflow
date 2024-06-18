@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from "@react-native-material/core";
+import { AppBar, Button, IconButton, TextInput, ListItem  } from "@react-native-material/core";
 import { HStack, VStack } from 'react-native-flex-layout';
 import { Styles } from '@/constants';
 import { useRouter} from 'expo-router';
@@ -14,10 +14,21 @@ const HomeScreen =() => {
   };
 
   return (
+  <View style={{ flex: 1 }}>
+   <AppBar
+                  title="Alunos"
+                  style={Styles.appBar}
+                  leading={props => (
+                    <IconButton
+                      icon={props => <Icon name="arrow-left" {...props} />}
+                      onPress={()=> router.pop()}
+                      {...props}/>
+                  )}
+         />
    <View style={Styles.container}>
         <VStack m={20} spacing={12}>
           <HStack spacing={14}>
-              <Button title="Alunos"
+              <Button title="Menu"
               style={[Styles.button]}
               onPress={() => handlePress('/screens/student/list-student')}
               />
@@ -58,6 +69,7 @@ const HomeScreen =() => {
           </HStack>
        </VStack>
    </View>
+  </View>
 );
 };
 
