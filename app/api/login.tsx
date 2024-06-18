@@ -8,6 +8,8 @@ export const login = async (login : loginModel)  => {
   try {
     const response = await axios.post(`${API_URL}/login`, login);
     const loggedUser = response.data;
+    console.log(response);
+    
     await AsyncStorage.setItem('user', JSON.stringify(loggedUser));
     return { ...loggedUser};
   } catch (error) {
@@ -15,7 +17,7 @@ export const login = async (login : loginModel)  => {
   }
 };
 
-export const register = async (user : User)  => {
+export const register = async (user : Partial<User>)  => {
   try {
     const response = await axios.post(`${API_URL}/register`, user);
     const loggedUser = response.data;
