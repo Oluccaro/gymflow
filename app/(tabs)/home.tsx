@@ -15,10 +15,10 @@ const HomeScreen =() => {
 
   return (
   <View style={{ flex: 1 }}>
-   <AppBar
-                  title="Home"
-                  style={Styles.appBar}
-         />
+    <AppBar
+      title="Home"
+      style={Styles.appBar}
+    />
    <View style={Styles.container}>
         <VStack m={20} spacing={12}>
           <HStack spacing={14}>

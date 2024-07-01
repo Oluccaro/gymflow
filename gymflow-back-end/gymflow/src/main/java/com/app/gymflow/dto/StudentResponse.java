@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentDTO {
+public class StudentResponse {
   private Long id;
   private String name;
   private String phone;
@@ -19,4 +19,5 @@ public class StudentDTO {
   private Character sex;
   private Double height;
   private Double weight;
+  private DealDTO deal;
 }

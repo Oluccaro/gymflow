@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { AppBar, Button, IconButton, TextInput } from "@react-native-material/core";
 import { VStack } from 'react-native-flex-layout';
-import { Styles } from '@/constants';
+import { Colors, Styles } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { useRouter } from 'expo-router';
 import { createStudent } from '@/app/api/student'; // Ajuste para o método de criação do aluno
@@ -47,7 +47,7 @@ const CreateStudent = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: Colors.backgroundMain }}>
       <AppBar
         title="Novo Aluno"
         style={Styles.appBar}

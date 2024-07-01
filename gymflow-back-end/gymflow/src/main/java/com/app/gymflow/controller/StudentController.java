@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.gymflow.dto.StudentDTO;
+import com.app.gymflow.dto.StudentRequest;
+import com.app.gymflow.dto.StudentResponse;
 import com.app.gymflow.service.StudentService;
 
 @RestController
@@ -29,21 +30,21 @@ public class StudentController {
   private StudentService studentService;
 
   @GetMapping
-  public ResponseEntity<List<StudentDTO>> getAllStudents(){
-    return new ResponseEntity<List<StudentDTO>>(studentService.getAllStudents(), HttpStatusCode.valueOf(200));
+  public ResponseEntity<List<StudentResponse>> getAllStudents(){
+    return new ResponseEntity<List<StudentResponse>>(studentService.getAllStudents(), HttpStatusCode.valueOf(200));
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<StudentDTO> getStudent(@PathVariable Long id){
-    Optional<StudentDTO> optStudent = studentService.getStudent(id);
+  public ResponseEntity<StudentResponse> getStudent(@PathVariable Long id){
+    Optional<StudentResponse> optStudent = studentService.getStudent(id);
     return optStudent.map(ResponseEntity::ok)
                      .orElseGet(()->ResponseEntity.status(HttpStatus.NOT_FOUND).build());
   }
 
   @PostMapping
-  public ResponseEntity<StudentDTO> createStudent(@RequestBody StudentDTO studentDTO){
+  public ResponseEntity<StudentResponse> createStudent(@RequestBody StudentRequest studentDTO){
     try{
-      StudentDTO student = studentService.createStudent(studentDTO);
+      StudentResponse student = studentService.createStudent(studentDTO);
       return ResponseEntity.status(HttpStatus.CREATED).body(student);
     }
     catch(IllegalArgumentException e){
@@ -52,8 +53,8 @@ public class StudentController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody StudentDTO studentDTO){
-    Optional<StudentDTO> optStudent = studentService.updateStudent(id, studentDTO);
+  public ResponseEntity<StudentResponse> updateStudent(@PathVariable Long id, @RequestBody StudentRequest studentDTO){
+    Optional<StudentResponse> optStudent = studentService.updateStudent(id, studentDTO);
     return optStudent.map(ResponseEntity::ok)
                      .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
   }

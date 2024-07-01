@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { AppBar, Button, IconButton, TextInput, ListItem, Switch } from "@react-native-material/core";
 import { VStack } from 'react-native-flex-layout';
-import { Styles } from '@/constants';
+import { Colors, Styles } from '@/constants';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { Modality } from '@/app/models/modalityModel';
 import { createDeal } from '@/app/api/deal';
@@ -23,13 +23,14 @@ const NewDeal = () => {
   const [intervalNumber, setIntervalNumber] = useState('');
 
   const [selectedModalities, setSelectedModalities] = useState<Modality[]>([]);
+  const [allModalities, setAllModalities] = useState<Modality[]>([]);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     const fetchModalities = async () => {
       try {
         const modalitiesList = await getModalities();
-        setSelectedModalities(modalitiesList);
+        setAllModalities(modalitiesList);
       } catch (error) {
         console.error(error);
       }
@@ -75,6 +76,8 @@ const NewDeal = () => {
     } else {
       setSelectedModalities(prev => prev.filter(item => item.id !== modality.id));
     }
+    console.log(selectedModalities);
+    
   };
 
   return (
@@ -145,8 +148,15 @@ const NewDeal = () => {
                 <Picker.Item label="Anos" value="anos" />
               </Picker>
               <Text style={Styles.label}>Modalidades inclusas no plano:</Text>
-              {selectedModalities.map(modality => (
+              {allModalities.map(modality => (
                 <BouncyCheckbox
+                  size={25}
+                  fillColor={Colors.primary}
+                  iconStyle={{ borderColor: Colors.primary }}
+                  innerIconStyle={{ borderWidth: 2 }}
+                  textStyle={{
+                    textDecorationLine: 'none', // Remove the dashed underline
+                  }}
                   key={modality.id}
                   text={modality.name}
                   isChecked={selectedModalities.some(item => item.id === modality.id)}
