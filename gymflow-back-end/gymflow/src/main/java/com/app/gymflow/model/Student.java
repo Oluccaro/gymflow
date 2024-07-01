@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +19,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "t_student")
+@Entity
+@Table(name = "t_student")
 public class Student {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,7 @@ public class Student {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "phone", nullable = false)
+  @Column(name = "phone", nullable = false, unique = true)
   private String phone;
 
   @Column(name = "birth_date")
@@ -39,4 +43,9 @@ public class Student {
 
   @Column(name = "weight")
   private Double weight;
+
+  @ManyToOne
+  @JoinColumn(name = "deal_id", nullable = true)
+  private Deal deal;
+
 }

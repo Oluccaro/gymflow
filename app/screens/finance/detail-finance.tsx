@@ -53,21 +53,22 @@ const DetailFinance: React.FC = () => {
   };
 
   const handlePayment = (finance: Finance) => {
-    Alert.alert('Confirmar pagamento', `Tem certeza que deseja confirmar o pagamento da conta ${finance.id}?`, [
-      { text: 'Cancelar', style: 'cancel' },
-      {
-        text: 'Confirmar',
-        onPress: async () => {
-          try {
-            const updatedFinance = { ...finance, amountPaid: finance.amountOwed };
-            await updateFinance(finance.id, updatedFinance);
-            setFinances(finances.map(f => f.id === finance.id ? updatedFinance : f));
-          } catch (error) {
-            console.error(error);
-          }
-        }
-      }
-    ]);
+    // Alert.alert('Confirmar pagamento', `Tem certeza que deseja confirmar o pagamento da conta ${finance.id}?`, [
+    //   { text: 'Cancelar', style: 'cancel' },
+    //   {
+    //     text: 'Confirmar',
+    //     onPress: async () => {
+    //       try {
+    //         const updatedFinance = { ...finance, amountPaid: finance.amountOwed };
+    //         await updateFinance(finance.id, updatedFinance);
+    //         setFinances(finances.map(f => f.id === finance.id ? updatedFinance : f));
+    //       } catch (error) {
+    //         console.error(error);
+    //       }
+    //     }
+    //   }
+    // ]);
+    router.push(`/screens/finance/check-payment?id=${finance.id}`);
   };
 
   return (

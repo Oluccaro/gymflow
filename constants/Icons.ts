@@ -11,6 +11,10 @@ import eyeHide from "@/assets/icons/eye-hide.png";
 import eye from "@/assets/icons/eye.png";
 import finances from "@/assets/icons/finances.png";
 import deal from "@/assets/icons/deal.png";
+import pixLogo from "@/assets/icons/pix-logo.png";
+import pixIcon from "@/assets/icons/pix-icon.png"
+import qrCode from "@/assets/icons/qrcode.png";
+import confirmed from "@/assets/icons/confirmed.png"
 
 export default {
   home,
@@ -25,5 +29,9 @@ export default {
   eyeHide,
   eye,
   finances,
-  deal
+  deal,
+  pixLogo,
+  pixIcon,
+  qrCode,
+  confirmed
 };
