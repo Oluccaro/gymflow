@@ -1,8 +1,0 @@
-[
-{ "id": "1", "phone": "123.456.789-00", "nome": "Alice", "birthDate": "20/04/2998", "sex": "F", "height": 1000.50, "weight": 1000.50,"plano":  "Plus" },
-  { "id": "2", "phone": "987.654.321-00", "nome": "Bruno", "birthDate": "20/04/2998", "sex": "M", "height": 2000.75, "weight": 1000.50,"plano": "Plus" },
-  { "id": "3", "phone": "111.222.333-44", "nome": "Carla", "birthDate": "20/04/2998", "sex": "F", "height": 1500.30, "weight": 1000.50,"plano": "Plus" },
-    { "id": "1", "cpf": "123.456.789-00", "nome": "Alice", "phone": "123-456-7890", "birthDate": "01/01/2000", "sex": "F", "height": "1.65m", "weight": "60kg", "plano": "Premium" },
-    { "id": "2", "cpf": "987.654.321-00", "nome": "Bruno", "phone": "987-654-3210", "birthDate": "02/02/1995", "sex": "M", "height": "1.75m", "weight": "70kg", "plano": "Standard" },
-    { "id": "3", "cpf": "111.222.333-44", "nome": "Carla", "phone": "111-222-3334", "birthDate": "03/03/1990", "sex": "F", "height": "1.60m", "weight": "55kg", "plano": "Basic" }
-]
