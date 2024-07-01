@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView,  SafeAreaView, FlatList, } from 'react-native'
+import { View, Text, StyleSheet, ScrollView,  SafeAreaView, FlatList, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { AppBar, Button, IconButton, TextInput, ListItem  } from "@react-native-material/core";
 import { Stack, HStack, VStack } from 'react-native-flex-layout';
@@ -26,14 +26,21 @@ const ListStudent : React.FC = () => {
       fetchStudents();
     }, []);
 
-
     const handleDelete = async (id: number) => {
-      try {
-        await deleteStudent(id);
-        setStudents(students.filter(student => student.id !== id));
-      } catch (error) {
-        console.error(error);
-      }
+      Alert.alert('Confirmar exclusão', `Tem certeza que deseja excluir o cadastro do aluno?`, [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Confirmar',
+          onPress: async () => {
+            try {
+              await deleteStudent(id);
+              setStudents(students.filter(student => student.id !== id));
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+      ]);
     };
 
     const renderItem = ({ item }: { item: Student }) => (
