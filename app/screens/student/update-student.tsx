@@ -83,7 +83,6 @@ const UpdateStudent = () => {
                              value={student.birthDate}
                              onChangeText={(birthDate) => setStudent({...student, birthDate: birthDate})}
                       />
-                       <Text style={Styles.label}>Gênero:</Text>
                       <Text style={Styles.label}>Gênero:</Text>
                         <Picker
                           selectedValue={student.sex}

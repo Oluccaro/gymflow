@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, FlatList, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { AppBar, Button, IconButton, ListItem } from "@react-native-material/core";
 import { Stack } from 'react-native-flex-layout';
@@ -26,12 +26,20 @@ const ListModality: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: number) => {
-    try {
-      await deleteModality(id);
-      setModalities(modalities.filter(modality => modality.id !== id));
-    } catch (error) {
-      console.error(error);
-    }
+    Alert.alert('Excluir', `Tem certeza que deseja excluir a modalidade?`, [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Excluir',
+        onPress: async () => {
+          try {
+            await deleteModality(id);
+            setModalities(modalities.filter(modality => modality.id !== id));
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    ]);
   };
 
   const renderItem = ({ item }: { item: Modality }) => (

@@ -6,9 +6,11 @@ import { TextInput, Image, Pressable} from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { Styles, Images, Colors } from '@/constants';
 import { Link, useRouter } from 'expo-router';
-import { login } from '../api/login';
 import { User } from '../models/User';
-
+import { useForm, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { TextInputMask } from 'react-native-masked-text';
 
 
 

@@ -54,7 +54,15 @@ export const Styles = StyleSheet.create({
       paddingRight: 16,
       borderRadius: 4,
     },
-
+  inputCadastro: {
+    height: 56,
+    marginBottom: 12,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+  },
   rememberMeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -112,15 +120,13 @@ export const Styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
 
-
   picker: {
       height: 56,
       marginBottom: 12,
       backgroundColor: '#F5F5F5',
       borderRadius: 4,
       borderWidth: 1,
-      borderColor: 'black',
-      marginBottom: 20,
+      borderColor: '#ccc',
   },
 
   label: {

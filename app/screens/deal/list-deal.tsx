@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, FlatList, Alert } from 'react-native';
 import { AppBar, Button, IconButton, ListItem } from "@react-native-material/core";
 import { Stack } from 'react-native-flex-layout';
 import { Styles, Colors } from '@/constants';
@@ -26,12 +26,20 @@ const ListDeal: React.FC = () => {
   }, []);
 
   const handleDelete = async (id: number) => {
-    try {
-      await deleteDeal(id);
-      setDeals(deals.filter(deal => deal.id !== id));
-    } catch (error) {
-      console.error(error);
-    }
+    Alert.alert('Excluir', `Tem certeza que deseja excluir o plano?`, [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Excluir',
+        onPress: async () => {
+          try {
+            await deleteDeal(id);
+            setDeals(deals.filter(deal => deal.id !== id));
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    ]);
   };
 
   const renderItem = ({ item }: { item: Deal }) => (
